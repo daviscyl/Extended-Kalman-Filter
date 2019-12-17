@@ -39,4 +39,8 @@ MatrixXd Tools::CalculateJacobian(const VectorXd &x_state) {
    * TODO:
    * Calculate a Jacobian here.
    */
+	int n = x_state.size();
+	MatrixXd jacoian(n, n);
+
+	return jacoian;
 }
