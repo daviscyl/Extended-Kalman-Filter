@@ -39,15 +39,10 @@ void KalmanFilter::UpdateEKF(VectorXd z) {
 		    atan2(x_(1), x_(0)),
 		    (x_(0) * x_(2) + x_(1) * x_(3)) / rho;
 
-		// normailize the angle measurement
-		if (z(1) < 0) {
-			while (z(1) < -M_PI) {
-				z[1] += (2 * M_PI);
-			}
-		} else {
-			while (z(1) > M_PI) {
-				z[1] -= (2 * M_PI);
-			}
+		// normalize angle measurement
+		while (abs(z(1) - z_pred(1)) > M_PI)
+		{
+			z(1) += (z(1) < z_pred(1) ? 1 : -1) * 2 * M_PI;
 		}
 	}
 
